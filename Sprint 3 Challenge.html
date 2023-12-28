@@ -23,7 +23,7 @@
 </head>
 
 <body>
-  <h1>Web Sprint 3 Challenge! </h1>
+  <h1>Web Sprint 3 Challenge </h1>
   <p>❗ See the last script tag for instructions on completing your Challenge</p>
   <!-- widgets start, do not modify -->
   <section class="widget">
@@ -58,39 +58,36 @@
       // 🧠 Implement a `getAllReversed` method which returns the ints in reverse order
       // ❗ WARNING: except for `getAllReversed`, methods must respect the order of the integers
       // ❗ WARNING: note that none of the methods actually mutate the `ints` property
-    
-  constructor(...args) {
-    this.ints = args;
-  }
-getAll() {
-    return this.ints;
-  }
-getEvens() {
-    return this.ints.filter(num => num % 2 === 0);
-  }
-getNegatives() {
-    return this.ints.filter(num => num < 0);
-  }
-getAllSquared() {
-    return this.ints.map(num => num ** 2);
-  }
-pop() {
+    constructor(...args){
+      this.ints = args;
+    }
+    getAll() {
+      return this.ints;
+    }
+    getEvens() {
+      return this.ints.filter(num => num % 2 === 0);
+    }
+    getNegatives(){
+      return this.ints.filter(num => num < 0);
+    }
+    getAllSquared() {
+      return this.ints.map(num => num ** 2);
+    }
+    pop(num) {
     const lastInt = this.ints.pop();
     return lastInt;
-  }
-push(num) {
-    this.ints.push(num);
-    return this.ints;
-  }
-getEveryNth(n) {
-    return this.ints.filter((_, index) => index % n === 0);
-  }
-
-  getAllReversed() {
-    return this.ints.slice().reverse();
-  }
-}
-
+    }
+    push(num) {
+      this.ints.push(num);
+      return this.ints;
+    }
+    getEveryNth(n) {
+      return this.ints.filter((_, index) => index % n === 0);
+    }
+    getAllReversed() {
+      return this.ints.slice().reverse();
+    }
+    }
     
 
     // 👉 CHALLENGE 2 NerfGun
@@ -110,41 +107,36 @@ getEveryNth(n) {
       // 🌟 HINT: instances need to keep track of their maximum capacity as well as their current capacity
       
   constructor(totalProjectiles) {
-    this.maxCapacity = totalProjectiles;
+    this.maxCapacity = totalProjectiles
     this.currentCapacity = totalProjectiles;
     this.safetyOn = true;
   }
-
   shoot() {
     if (this.currentCapacity > 0 && !this.safetyOn) {
       this.currentCapacity -= 1;
       return "Bang!";
-    } else {
+    }else {
       return "Click!";
     }
-  }
-
-  reload(amount) {
-    if (typeof amount !== 'number' || amount <= 0) {
-      return "Error reloading!";
-    }
-
-    this.currentCapacity = Math.min(this.maxCapacity, this.currentCapacity + amount);
-    return `${this.currentCapacity} projectiles left!`;
-  }
-
-  toggleSafety() {
-    this.safetyOn = !this.safetyOn;
-
-    if (this.safetyOn) {
-      return "Safety enabled!";
-    } else {
-      return "Safety disabled!";
-    }
-  }
-}
     
+  }
 
+    reload(amount) {
+      if (typeof amount !== "number" || amount <= 0) {
+        return "Error reloading!";
+      }
+      this.currentCapacity = Math.min(this.maxCapacity, this.currentCapacity + amount);
+      return `${this.currentCapacity} projectiles left!`;
+    }
+    toggleSafety() {
+      this.safetyOn = !this.safetyOn;
+      if (this.safetyOn) {
+        return "Safety enabled!";
+      }else {
+        return "Safety disabled!";
+      }
+    }
+  }
     // 👉 CHALLENGE 3 EBook
     class EBook {
       // 🧠 Constructor takes two arguments:
@@ -161,38 +153,23 @@ getEveryNth(n) {
       //    ebook.next() // returns null
       // 🌟 HINT: remember about the `slice` method which strings and arrays have
       // ❗ Feel free to implement `back`, although this is not required nor graded
-      constructor(bookText, charactersPerPage) {
-    this.bookText = bookText;
+      
+      constructor(text, charactersPerPage) {
+    this.text = text;
     this.charactersPerPage = charactersPerPage;
     this.currentPage = 0;
   }
-
   next() {
-    const startIdx = this.currentPage * this.charactersPerPage;
-    const endIdx = startIdx + this.charactersPerPage;
+    const start = this.currentPage * this.charactersPerPage;
+    const end = start + this.charactersPerPage;
 
-    if (startIdx >= this.bookText.length) {
-      return null; 
+    if (start >= this.text.length) {
+      return null;
     }
+    const nextPage = this.text.slice(start, end);
+    this.currentPage++;
 
-    const nextPage = this.bookText.slice(startIdx, endIdx);
-    this.currentPage += 1;
-
-    return nextPage;
-  }
-
-  
-  back() {
-    if (this.currentPage > 0) {
-      this.currentPage -= 1;
-
-      const startIdx = this.currentPage * this.charactersPerPage;
-      const endIdx = startIdx + this.charactersPerPage;
-
-      return this.bookText.slice(startIdx, endIdx);
-    } else {
-      return null; 
-    }
+  return nextPage;
   }
 }
     
